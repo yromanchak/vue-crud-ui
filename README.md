@@ -1,4 +1,4 @@
-# vue-test
+# Vue.js CRUD app
 
 ## Project setup
 ```
