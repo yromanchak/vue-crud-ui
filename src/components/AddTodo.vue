@@ -28,6 +28,7 @@ export default {
         title: this.title,
         completed: false
       }
+      if (this.title === '') return;
       axios
           .post('http://localhost:3000/todos/', newTodo)
           .then(response => {
