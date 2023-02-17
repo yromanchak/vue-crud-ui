@@ -1,10 +1,11 @@
 <template>
   <div class="crud-add">
     <form action="" @submit="addNewTodo">
-      <div class="input">
-        title:<input type="text" v-model="title">
+      <div class="form-group">
+        <label for="add-title">Title</label>
+        <input type="text" id="add-title" v-model="title">
       </div>
-      <div class="btn" v-on:click="addNewTodo">Add</div>
+      <div class="btn" v-on:click="addNewTodo">Create</div>
     </form>
   </div>
 </template>
@@ -48,25 +49,48 @@ export default {
 
 <style scoped lang="scss">
     .crud-add {
-      .input {
-        font-size: 24px;
-        font-weight: bold;
+      margin-bottom: 60px;
+      * {
+        box-sizing: border-box;
+      }
+      .form-group {
+        text-align: left;
+        margin-bottom: 20px;
       }
       form {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        max-width: 500px;
+        margin: 0 auto;
         input {
-          padding: 5px;
-          margin-right: 30px;
-          margin-left: 10px;
+          display: block;
+          width: 100%;
+          height: 34px;
+          padding: 6px 12px;
+          font-size: 16px;
+          line-height: 1.42857143;
+          color: #555;
+          background-color: #fff;
+          background-image: none;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          -webkit-box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+          box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+          -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+          -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+          transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+        }
+        label {
+          display: inline-block;
+          max-width: 100%;
+          margin-bottom: 5px;
+          font-weight: 700;
         }
       }
     }
     .btn {
-      height: 42px;
+      height: 40px;
       display: flex;
       align-items: center;
+      justify-content: center;
       background: mediumseagreen;
       color: #fff;
       font-weight: bold;
