@@ -6,6 +6,7 @@
       <AddTodo v-on:add-todo="addTodo"/>
 
       <div class="filter">
+        <div class="filter-title">Filter</div>
         <select v-model="filter">
           <option value="all">All</option>
           <option value="completed">Completed</option>
@@ -14,17 +15,14 @@
       </div>
 
       <TodoLoader v-if="loading" />
+
       <TodosUl v-bind:todos="filteredItems"
                v-on:delete-todo="deleteTodo"
                v-else-if="filteredItems.length"
       />
+
       <div class="-empty" v-else>List empty</div>
-
-      <div class="link">
-        <router-link to="/about">Go to CRUD</router-link>
-      </div>
     </div>
-
   </div>
 </template>
 
@@ -92,6 +90,35 @@ export default {
 </script>
 
 <style scoped lang="scss">
+* {
+  box-sizing: border-box;
+}
+.filter {
+  max-width: 500px;
+  margin: 0 auto 40px;
+  text-align: left;
+  &-title {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: 700;
+  }
+  select {
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 16px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  }
+}
 .-empty {
   font-size: 24px;
   line-height: 32px;
@@ -100,9 +127,5 @@ export default {
   border: 1px solid gray;
   padding: 10px;
   margin: 40px 0;
-}
-select {
-  margin-top: 20px;
-  height: 40px;
 }
 </style>
