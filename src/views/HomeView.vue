@@ -3,7 +3,7 @@
     <div v-if="errored">We're sorry, we're not able to retrieve this information at the moment, please try back later</div>
 
     <div v-else>
-      <AddTodo v-on:add-todo="addTodo"/>
+      <TodoAdd v-on:add-todo="addTodo"/>
 
       <div class="filter">
         <div class="filter-title">Filter</div>
@@ -16,7 +16,7 @@
 
       <TodoLoader v-if="loading" />
 
-      <TodosUl v-bind:todos="filteredItems"
+      <TodosList v-bind:todos="filteredItems"
                v-on:delete-todo="deleteTodo"
                v-else-if="filteredItems.length"
       />
@@ -27,16 +27,16 @@
 </template>
 
 <script>
-import AddTodo from '@/components/AddTodo';
-import TodosUl from '@/components/TodosUl';
+import TodoAdd from '@/components/TodoAdd';
+import TodosList from '@/components/TodosList';
 import TodoLoader from '@/components/TodoLoader';
 import axios from 'axios';
 
 export default {
   name: 'HomeView',
   components: {
-    AddTodo,
-    TodosUl,
+    TodoAdd,
+    TodosList,
     TodoLoader,
   },
   data() {
