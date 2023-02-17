@@ -25,7 +25,7 @@
 import TodoItem from "@/components/TodoItem";
 
 export default {
-  name: "TodosUl",
+  name: "TodosList",
   props: ['todos'],
   data() {
     return {
