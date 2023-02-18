@@ -4,7 +4,8 @@
       <div class="form-group">
         <label for="add-title">Title</label>
         <input type="text" id="add-title" v-model="title">
-        <div class="error" v-if="error.length">Please correct the following error(s): <strong>{{ error }}</strong></div>
+        <div class="error" v-if="error">Please correct the following error(s): <strong>{{ error }}</strong></div>
+        <div class="success" v-if="success">Title added successfully!</div>
       </div>
       <div class="btn" v-on:click="addNewTodo">Create</div>
     </form>
@@ -21,7 +22,8 @@ export default {
     return {
       id: '',
       title: '',
-      error: ''
+      error: false,
+      success: false
     }
   },
   methods: {
@@ -31,7 +33,6 @@ export default {
         title: this.title,
         completed: false
       }
-      this.error = '';
       if (!this.title) {
         this.error = 'Title required';
         return;
@@ -40,10 +41,13 @@ export default {
           .post('http://localhost:3000/todos/', newTodo)
           .then(response => {
             console.log(response);
-            if (this.title.trim()) {
-              this.$emit('add-todo', response.data);
-              this.title = '';
-            }
+            this.$emit('add-todo', response.data);
+            this.title = '';
+            this.success = true;
+            this.error = false;
+            let timerId = null;
+            clearTimeout(timerId);
+            timerId = setTimeout(() => this.success = false, 2000)
           })
           .catch(error => {
             console.log(error);
@@ -54,6 +58,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+    .success {
+      color: green;
+      font-size: 12px;
+    }
     .error {
       color: red;
       font-size: 12px;
