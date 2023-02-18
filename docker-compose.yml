@@ -1,0 +1,20 @@
+services:
+    json-server:
+        image: vimagick/json-server
+        container_name: json-server
+        command: -H 0.0.0.0 -p 3000 -w db.json
+        ports:
+            - "3000:3000"
+        volumes:
+            - ./json-server:/data
+        restart: always
+    frontend:
+        image: frontend
+        build:
+            dockerfile: ./node.dockerfile
+        container_name: vue-crud-ui
+        command: npm run serve
+        volumes:
+          - ./frontend:/app
+        ports:
+            - '8080:8080'

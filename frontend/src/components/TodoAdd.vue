@@ -4,6 +4,7 @@
       <div class="form-group">
         <label for="add-title">Title</label>
         <input type="text" id="add-title" v-model="title">
+        <div class="error" v-if="error.length">Please correct the following error(s): <strong>{{ error }}</strong></div>
       </div>
       <div class="btn" v-on:click="addNewTodo">Create</div>
     </form>
@@ -19,7 +20,8 @@ export default {
   data() {
     return {
       id: '',
-      title: ''
+      title: '',
+      error: ''
     }
   },
   methods: {
@@ -29,7 +31,11 @@ export default {
         title: this.title,
         completed: false
       }
-      if (!this.title.trim()) return;
+      this.error = '';
+      if (!this.title) {
+        this.error = 'Title required';
+        return;
+      }
       axios
           .post('http://localhost:3000/todos/', newTodo)
           .then(response => {
@@ -48,6 +54,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
+    .error {
+      color: red;
+      font-size: 12px;
+      padding-top: 2px;
+    }
     .crud-add {
       margin-bottom: 60px;
       * {
@@ -55,7 +66,8 @@ export default {
       }
       .form-group {
         text-align: left;
-        margin-bottom: 20px;
+        margin-bottom: 5px;
+        height: 80px;
       }
       form {
         max-width: 500px;
