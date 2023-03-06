@@ -12,7 +12,7 @@ services:
         image: frontend
         build:
             dockerfile: ./node.dockerfile
-        container_name: vue-crud-ui
+        container_name: frontend
         command: npm run serve
         volumes:
           - ./frontend:/app
